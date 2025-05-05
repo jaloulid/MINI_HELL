@@ -1,22 +1,33 @@
-SOURCE = 
-
-OBJECT = $(SOURCE:.c=.o)
+NAME = minishell
+SRC = main.c lexer.c
+OBJ = $(SRC:.c=.o)
 
 CC = cc
+CFLAGS = -Wall -Wextra -Werror
 
+LIBFT_DIR = libft
+LIBFT = $(LIBFT_DIR)/libft.a
 
-CFLAGS = -Wall -Werror -Wextra 
-NAME = minishell.a
+INCLUDES = -I.
 
-all : $(NAME)
+all: $(LIBFT) $(NAME)
 
-$(NAME): $(OBJECT)
-	ar rc $(NAME) $(OBJECT) 
+$(LIBFT):
+	make -C $(LIBFT_DIR)
 
-clean :
-	rm -f  $(OBJECT)
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -lreadline -o $(NAME)
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-fclean : clean
+clean:
+	make -C $(LIBFT_DIR) clean
+	rm -f $(OBJ)
+
+fclean: clean
+	make -C $(LIBFT_DIR) fclean
 	rm -f $(NAME)
 
-re : fclean all
+re: fclean all
+
+.PHONY: all clean fclean re
