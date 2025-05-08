@@ -1,5 +1,5 @@
 NAME = minishell
-SRC = main.c lexer.c
+SRC = main.c lexer.c lexer_word.c lexer_utils.c lexer_free.c
 OBJ = $(SRC:.c=.o)
 
 CC = cc
