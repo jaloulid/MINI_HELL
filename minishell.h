@@ -13,8 +13,10 @@
 #include <dirent.h>
 #include <ctype.h>
 #include <limits.h>
+#include "libft.h"
 
-
+void    ft_echo(char **argv);
+void    ft_cd(char **argv);
 
 #endif
 
