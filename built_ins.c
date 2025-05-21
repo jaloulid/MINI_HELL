@@ -69,6 +69,24 @@ int	ft_pwd(char **av)
 
 int	ft_unset(char *c_name)
 {
-	
+    t_node *env;
+    t_node *copy;
+    env = malloc(sizeof(t_node));
+    copy = env;
 
+    while(copy)
+    {
+        if(ft_strncmp(copy->next->key, c_name, ft_strlen(copy->key)))
+            copy = copy->next;
+        else
+            break;
+    }
+    if(copy->next == NULL && ft_strncmp(copy->key, c_name, ft_strlen(copy->key)))
+        return(1);
+    else
+    {
+        copy = copy->next->next;
+        copy->next = NULL;
+    }
+    return(0);
 }
