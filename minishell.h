@@ -13,10 +13,19 @@
 #include <dirent.h>
 #include <ctype.h>
 #include <limits.h>
-#include "libft.h"
+#include "libft/libft.h"
 
-void    ft_echo(char **argv);
-void    ft_cd(char **argv);
+typedef struct s_node
+{
+    char *key;
+    char *value;
+    struct s_node *next;
+} t_node;
+
+int		ft_echo(char **argv);
+int		ft_cd(char **argv);
+int		ft_pwd(char **av)
+t_node	*env_init(char **env);
 
 #endif
 
