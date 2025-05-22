@@ -22,6 +22,7 @@ int	main(void)
 		if (!line)
 			break ;
 		tokens = lexer(line);
+		printf("%s\n", line);
 		print_tokens(tokens);
 	}
 }
