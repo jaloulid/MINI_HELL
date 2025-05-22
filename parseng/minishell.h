@@ -51,6 +51,9 @@ typedef enum e_redir_type
 	// REDIR_IN,
 	// REDIR_OUT,
 	// REDIR_APPEND,
+	RED_IN,
+	RED_OUT,
+	RED_APPEND,
 	HERDOC
 }	t_redir_type;
 
