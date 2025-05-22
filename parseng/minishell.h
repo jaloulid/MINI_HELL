@@ -6,7 +6,7 @@
 /*   By: jaloulid <jaloulid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 06:05:49 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/05/22 19:38:06 by jaloulid         ###   ########.fr       */
+/*   Updated: 2025/05/22 21:00:49 by jaloulid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void    handle_operator(char *line, int *i, t_token **list);
 //PARSER STRUCTER
 typedef enum e_redir_type
 {
-	REDIR_IN,
-	REDIR_OUT,
-	REDIR_APPEND,
+	RED_IN,
+	RED_OUT,
+	RED_APPEND,
 	HERDOC
 }	t_redir_type;
 
