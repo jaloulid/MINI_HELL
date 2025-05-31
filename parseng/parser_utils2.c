@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaloulid <jaloulid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 06:55:06 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/05/29 20:11:34 by jaloulid         ###   ########.fr       */
+/*   Created: 2025/05/30 23:40:26 by jaloulid          #+#    #+#             */
+/*   Updated: 2025/05/30 23:40:29 by jaloulid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*lexer(char *line)
+void    parse_init_cmd(t_cmd **current, t_cmd **cmds)
 {
-	t_token	*list;
-	int		i;
-
-	list = NULL;
-	i = 0;
-	while (line[i])
-	{
-		while (line[i] == ' ')
-			i++;
-		if (!line[i])
-			break ;
-		if (line[i] == '|' || line[i] == '<' || line[i] == '>')
-			handle_operator(line, &i, &list);
-		else
-			handle_word(line, &i, &list);
-	}
-	return (list);
+    if (!current)
+    {
+        *current = new_cmd();
+        if (!*current)
+            return ;
+        cmd_add_back(cmds, *current);
+    }
+}
+void    parse_handle_pipe(t_cmd **current)
+{
+    *current = NULL;
 }

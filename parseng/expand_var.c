@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_free.c                                       :+:      :+:    :+:   */
+/*   expand_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaloulid <jaloulid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 20:02:41 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/05/29 20:11:49 by jaloulid         ###   ########.fr       */
+/*   Created: 2025/05/30 23:39:07 by jaloulid          #+#    #+#             */
+/*   Updated: 2025/05/30 23:50:27 by jaloulid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    free_token_list(t_token *list)
+char    *expand_var(char *str, t_node *env, int last_exit)
 {
-    t_token *tmp;
-    
-    while (list)
+    char    *res;
+    char    *tmp;
+    int i;
+
+    res = ft_strdup("");
+    i = 0;
+
+    while (str[i])
     {
-        tmp = list->next;
-        free(list->value);
-        free(list);
-        list = tmp;
+        if (str[i] == '$')
+        {
+            i++;
+            tmp = expand_dollar(str, &i, env, last_exit);
+            res = append_str(res, tmp);
+            free(tmp);
+        }
+        else
+            res = append_char(res, str[i++]);
     }
+    return (res);
 }
