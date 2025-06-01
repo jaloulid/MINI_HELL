@@ -6,7 +6,7 @@
 /*   By: jaloulid <jaloulid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 00:17:31 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/05/31 02:11:46 by jaloulid         ###   ########.fr       */
+/*   Updated: 2025/05/31 03:02:28 by jaloulid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,3 @@ void    expand_cmds(t_cmd *cmds, t_node *env, int status)
         cmds = cmds->next;
     }
 }
-
