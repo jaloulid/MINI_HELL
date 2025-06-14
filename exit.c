@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils2.c                                    :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaloulid <jaloulid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/30 23:40:26 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/05/30 23:40:29 by jaloulid         ###   ########.fr       */
+/*   Created: 2025/06/14 16:59:55 by yoessedr          #+#    #+#             */
+/*   Updated: 2025/06/14 17:08:38 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    parse_init_cmd(t_cmd **current, t_cmd **cmds)
+int g_exit_status = 0; 
+
+void ft_exit(char **argv,int ac)
 {
-    if (!current)
+    int exit_status;
+
+    exit_status = 0;
+    if(ac > 1)
     {
-        *current = new_cmd();
-        if (!*current)
-            return ;
-        cmd_add_back(cmds, *current);
+        if(only_digit(argv[1]))
+            exit_status = ft_atoi(argv[1]);   
     }
-}
-void    parse_handle_pipe(t_cmd **current)
-{
-    *current = NULL;
+    else
+        exit_status = g_exit_status;
+    exit(exit_status);
 }
