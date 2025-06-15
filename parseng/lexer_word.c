@@ -6,7 +6,7 @@
 /*   By: jaloulid <jaloulid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 19:50:30 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/05/08 20:38:09 by jaloulid         ###   ########.fr       */
+/*   Updated: 2025/06/02 23:15:04 by jaloulid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,32 @@ void    handle_operator(char *line, int *i, t_token **list)
     (*i)++;
     add_back(list, new_token(op, get_token_type(op)));
 }
-static int  skip_quotes(char *line, int i)
+static int  skip_quotes(char *str, int i)
 {
     char    q;
     
-    q = line[i++];
-    while (line[i] && line[i] != q)
+    q = str[i++];
+    while (str[i] && str[i] != q)
         i++;
-    if (line[i] == q)
-        i++;
-    return (i);
+    if (!str[i])
+        return (-1);
+    return (i + 1);
 }
 int get_word_len(char *line)
 {
     int i;
+    int j;
 
     i = 0;
     while (line[i] && line[i] != ' ' && line[i] != '|' && line[i] != '<' && line[i] != '>')
     {
         if (line[i] == '\'' || line[i] == '"')
-            i = skip_quotes(line, i);
+        {
+            j = skip_quotes(line, i);
+            if (j == -1)
+                return (-1);
+            i = j;
+        }
         else
             i++;
     }

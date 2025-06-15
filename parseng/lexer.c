@@ -6,7 +6,7 @@
 /*   By: jaloulid <jaloulid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 06:55:06 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/05/29 20:11:34 by jaloulid         ###   ########.fr       */
+/*   Updated: 2025/06/02 23:36:34 by jaloulid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,16 @@ t_token	*lexer(char *line)
 {
 	t_token	*list;
 	int		i;
-
+	int		len;
+	
 	list = NULL;
 	i = 0;
+	len = get_word_len(line);
+	if (len == -1)
+	{
+		printf("minishell: syntax error: unclosed quote\n");
+		return (NULL);
+	}
 	while (line[i])
 	{
 		while (line[i] == ' ')

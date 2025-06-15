@@ -6,7 +6,7 @@
 /*   By: jaloulid <jaloulid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 23:40:07 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/05/30 23:40:09 by jaloulid         ###   ########.fr       */
+/*   Updated: 2025/06/02 01:15:46 by jaloulid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int parse_redirect_token(t_token **tokens, t_cmd *cmd, t_cmd **cmds)
         free_cmd_list(*cmds);
         return(0);
     }
+    printf("hello 1 \n");
+
     redir_add_back(&cmd->redirect, redir);
     *tokens = token->next;
     return (1);

@@ -1,6 +1,6 @@
 NAME = minishell
 SRC = main_parseng.c lexer.c lexer_word.c lexer_utils.c lexer_free.c parser_utils.c parser_free.c \
-		parser_args.c parcer.c parce_redir.c parser_utils2.c \
+		parser_args.c parcer.c parce_redir.c parser_utils2.c\
 		env_utils.c env_helper.c \
 		expand_dollar.c expand_var.c expand_utils.c expand_cmd.c global.c
  #parser_print.c

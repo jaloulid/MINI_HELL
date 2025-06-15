@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_parseng.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaloulid <jaloulid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 23:39:56 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/05/31 01:53:54 by jaloulid         ###   ########.fr       */
+/*   Updated: 2025/06/02 01:03:10 by jaloulid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,45 @@
 // print_tokens(tokens);
 //print_cmds(cmds);
 
+// int main(int ac, char **av, char **envp)
+// {
+// 	extern int g_exit_status;
+// 	t_node *env;
+// 	char	*line;
+// 	t_token	*tokens;
+// 	t_cmd	*cmds;
+	
+// 	(void)ac;
+// 	(void)av;
+// 	env = env_init(envp);
+// 	// show the envirement
+// 	t_node *tmp = env;
+// 	while (tmp)
+// 	{
+// 		printf("key: %s | value; %\n", tmp->key, tmp->value);
+// 			tmp = tmp->next;
+// 	}
+// 	// get specific variable
+// 	char *test = get_env_value(env, "USER");
+// 	if (test)
+// 		printf("TEST: USER = %s\n", test);
+// 	else
+// 		printf("TEST: USER not found!\n");
+// 	while (1)
+// 	{
+// 		line = readline("minishell$ ");
+// 		if (!line)
+// 			break ;
+// 		tokens = lexer(line);
+// 		cmds = parse_tokens(tokens);
+// 		expand_cmds(cmds, env, g_exit_status);
+// 		free_token_list(tokens);
+// 		free_cmd_list(cmds);
+// 		free(line);
+// 	}
+// 	return (0);
+// }
+
 int main(int ac, char **av, char **envp)
 {
 	extern int g_exit_status;
@@ -36,7 +75,20 @@ int main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	env = env_init(envp);
-	
+	// show the envirement
+	// t_node *tmp = env;
+	// while (tmp)
+	// {
+	// 	printf("key: %s | value; %s\n", tmp->key, tmp->value);
+	// 		tmp = tmp->next;
+	// }
+	// get specific variable
+	// char *test = get_env_value(env, "USER");
+
+	// if (test)
+	// 	printf("TEST: USER = %s\n", test);
+	// else
+	// 	printf("TEST: USER not found\n");
 	while (1)
 	{
 		line = readline("minishell$ ");
@@ -44,9 +96,8 @@ int main(int ac, char **av, char **envp)
 			break ;
 		tokens = lexer(line);
 		cmds = parse_tokens(tokens);
+		// print_cmds(cmds);
 		expand_cmds(cmds, env, g_exit_status);
-		//print_cmds(cmds);
-
 		free_token_list(tokens);
 		free_cmd_list(cmds);
 		free(line);

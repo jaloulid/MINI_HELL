@@ -6,7 +6,7 @@
 /*   By: jaloulid <jaloulid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 23:39:37 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/05/31 01:45:48 by jaloulid         ###   ########.fr       */
+/*   Updated: 2025/06/02 00:40:03 by jaloulid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,19 @@ t_node *env_init(char **env)
    while(*env)
    {
     found = ft_strchr(*env, '=');
+    if (!found || **env == '=' || found == *env)
+    {
+      env++;
+      continue ;
+    }
     len = found - *env;
     key = ft_substr(*env, 0, len);
     value = ft_strdup(found + 1);
-	new_node = env_add_new(key, value);
+    //printf("ENV_INIT : key = %s | value = %s\n", key, value);
+	  new_node = env_add_new(key, value);
     head = env_add_back(head, new_node);
     env++;
-    }
+  }
    return (head);
 }
 
