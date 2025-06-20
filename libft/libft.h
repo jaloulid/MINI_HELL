@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaloulid <jaloulid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:01:28 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/04/30 02:22:56 by jaloulid         ###   ########.fr       */
+/*   Updated: 2025/06/21 00:29:06 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,5 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strnstr(const char *src, const char *t_find, size_t n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
-int     ft_strcmp(const char *s1, const char *s2);
 
 #endif

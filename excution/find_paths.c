@@ -6,7 +6,7 @@
 /*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 22:27:46 by yoessedr          #+#    #+#             */
-/*   Updated: 2025/06/18 22:27:47 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/06/21 00:18:29 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,15 @@ char *check_path(char *cmd, char **env)
     }
     free(paths);
     return (NULL);
+}
+int pipe_number(t_cmd *cmds)
+{
+    int count = 0;
+
+    while (cmds)
+    {
+        count++;
+        cmds = cmds->next;
+    }
+    return (count);
 }

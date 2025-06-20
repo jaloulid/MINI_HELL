@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_parseng.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaloulid <jaloulid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 23:39:56 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/06/20 22:34:35 by jaloulid         ###   ########.fr       */
+/*   Updated: 2025/06/21 00:45:34 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,19 @@ int main(int ac, char **av, char **envp)
 			break ;
 		tokens = lexer(line);
 		cmds = parse_tokens(tokens);
-		// if (cmds && cmds->args && cmds->args[0])
-		// 	printf("%s\n", cmds->args[0]);
-		// else
-		// 	printf("cmds or cmds-> is NULL\n");
-		// // if (!cmds)
-		// // 	expand_cmds(cmds, env, g_exit_status);
-		// printf("%p\n",cmds->args[0]);
-		expand_cmds(cmds, env, g_exit_status);
+		if(pipe_number(cmds) == 1)
+			g_exit_status = exec_cmd(cmds->args, &env);
+		else
+			g_exit_status = exec_pipes(cmds, &env);
+		if (g_exit_status == -1)
+		{
+			fprintf(stderr, "Execution failed\n");
+			free_token_list(tokens);
+			free_cmd_list(cmds);
+			free(line);
+			continue;
+		}
+		expand_cmds(cmds, &env, g_exit_status);
 		free_token_list(tokens);
 		free_cmd_list(cmds);
 		free(line);

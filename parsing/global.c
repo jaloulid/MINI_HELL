@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   global.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaloulid <jaloulid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 01:54:05 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/05/31 01:54:41 by jaloulid         ###   ########.fr       */
+/*   Updated: 2025/06/21 00:35:48 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-	int g_exit_status = 0;
+	// int g_exit_status = 0;

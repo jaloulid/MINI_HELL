@@ -6,7 +6,7 @@
 /*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 17:32:18 by yoessedr          #+#    #+#             */
-/*   Updated: 2025/06/20 23:28:08 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/06/21 00:33:54 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,25 @@ int exec_builtin(char **cmd, t_node **env)
 }
 int exec_cmd(char **cmd, t_node **env)
 {
+	if (!cmd || !cmd[0])
+	{
+		fprintf(stderr, "No command provided\n");
+		return -1;
+	}
+	char *path = check_path(cmd[0], env);
+	if (path)
+		cmd[0] = path;
+	else
+	{
+		fprintf(stderr, "Command not found: %s\n", cmd[0]);
+		return -1;
+	}
 	if (ft_search(cmd[0], env) >= 0)
 		return exec_builtin(cmd, env);
 	else
 		return exec_external(cmd, NULL);
 }
+
 int ft_search(char *str, t_node **env)
 {
 	t_node *current = *env;
