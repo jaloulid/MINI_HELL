@@ -6,7 +6,7 @@
 /*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 17:32:18 by yoessedr          #+#    #+#             */
-/*   Updated: 2025/06/21 00:33:54 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/06/21 16:18:50 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int exec_builtin(char **cmd, t_node **env)
 		return -1;
 	}
 }
-int exec_cmd(char **cmd, t_node **env)
+int exec_cmd(char **cmd, char **env)
 {
 	if (!cmd || !cmd[0])
 	{
@@ -87,26 +87,25 @@ int exec_cmd(char **cmd, t_node **env)
 	char *path = check_path(cmd[0], env);
 	if (path)
 		cmd[0] = path;
-	else
-	{
-		fprintf(stderr, "Command not found: %s\n", cmd[0]);
-		return -1;
-	}
+		else
+		{
+			fprintf(stderr, "Command not found: %s\n", cmd[0]);
+			return -1;
+		}
 	if (ft_search(cmd[0], env) >= 0)
 		return exec_builtin(cmd, env);
 	else
 		return exec_external(cmd, NULL);
 }
 
-int ft_search(char *str, t_node **env)
+int ft_search(char *str,char  **env)
 {
-	t_node *current = *env;
 
-	while (current)
+	while (*env)
 	{
-		if (strcmp(current->key, str) == 0)
+		if (strncmp(*env, str, strlen(str)) == 0 && (*env)[strlen(str)] == '=')
 			return 0;
-		current = current->next;
+		env++;
 	}
 	return -1;
 }

@@ -6,7 +6,7 @@
 /*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 23:39:56 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/06/21 00:45:34 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/06/21 17:25:15 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	env = env_init(envp);
-	
+	char **array_env = env_list_to_array(env);
 	while (1)
 	{
 		line = readline("minishell$ ");
@@ -98,10 +98,10 @@ int main(int ac, char **av, char **envp)
 			break ;
 		tokens = lexer(line);
 		cmds = parse_tokens(tokens);
-		if(pipe_number(cmds) == 1)
-			g_exit_status = exec_cmd(cmds->args, &env);
+		if(pipe_number(cmds) == 1 && cmds->redirect == NULL)
+			g_exit_status = exec_cmd(cmds->args, array_env);
 		else
-			g_exit_status = exec_pipes(cmds, &env);
+			g_exit_status = exec_pipes(cmds, array_env);
 		if (g_exit_status == -1)
 		{
 			fprintf(stderr, "Execution failed\n");
