@@ -3,57 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaloulid <jaloulid@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 15:53:08 by yoessedr          #+#    #+#             */
-/*   Updated: 2024/11/13 14:08:56 by yoessedr         ###   ########.fr       */
+/*   Created: 2024/11/16 01:02:57 by jaloulid          #+#    #+#             */
+/*   Updated: 2024/11/22 10:14:07 by jaloulid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	isinset(int c, const char *set)
+static int	ft_check_char(char c, char const *set)
 {
 	int	i;
 
 	i = 0;
-	while (set[i])
+	while (set[i] != '\0')
 	{
-		if (c == set[i])
+		if (set[i] == c)
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-char	*ft_strtrim(char const *s, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	start;
-	size_t	end;
+	int		start;
+	int		end;
+	char	*ptr;
+	int		i;
 
-	if (!s || !set)
-		return (NULL);
 	start = 0;
-	while (s[start] && isinset(s[start], set))
+	while (s1[start] && ft_check_char(s1[start], set))
 		start++;
-	end = ft_strlen(s);
-	while (end > start && isinset(s[end - 1], set))
+	end = ft_strlen((char *)s1);
+	while (end > start && ft_check_char(s1[end - 1], set))
 		end--;
-	return (ft_substr(s, start, end - start));
+	ptr = (char *)malloc(sizeof(*ptr) * (end - start + 1));
+	if (!ptr)
+		return (NULL);
+	i = 0;
+	while (start < end)
+	{
+		ptr[i] = s1[start];
+		i++;
+		start++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
 }
-/*
-int main()
-{
-	char const	s[] = "   \n\n\r\r\t\t   HI TRIM THIS \n\n\n string   \t\t\n  ";
-	//char const *s = NULL;
-	char const *set = NULL;
-	//char const	set[] = "\n\t\r ";
-	
-	char	*trimmed;
-	
-	trimmed = ft_strtrim(s,set);
 
-	printf("%s\n", trimmed);
-
-	free (trimmed);
-}*/
+// int main(void)
+// {
+//    char str[] = "fatal tigers";
+//    char set[] = "f";
+//    char *p;
+//    p = ft_strtrim(str, set);
+//    printf("%s \n", p);
