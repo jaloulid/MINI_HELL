@@ -92,8 +92,8 @@ int exec_cmd(char **cmd, char **env)
 			fprintf(stderr, "Command not found: %s\n", cmd[0]);
 			return -1;
 		}
-	if (ft_search(cmd[0], env) >= 0)
-		return exec_builtin(cmd, env);
+	if (exec_builtin(cmd, env) == 0)
+		return 0;
 	else
 		return exec_external(cmd, NULL);
 }
