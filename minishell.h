@@ -6,7 +6,7 @@
 /*   By: jaloulid <jaloulid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 06:05:49 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/06/20 17:32:45 by jaloulid         ###   ########.fr       */
+/*   Updated: 2025/07/06 21:05:10 by jaloulid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ int parse_redirect_token(t_token **tokens, t_cmd *cmd, t_cmd **cmds);
 void    parse_word_token(t_token **tokens, t_cmd *cmd);
 void    parse_init_cmd(t_cmd **current, t_cmd **cmds);
 void    parse_handle_pipe(t_cmd **current);
+int parse_one_token(t_token *tokens, t_cmd **current, t_cmd **cmds);
+int check_pipe_syntax(t_token *tokens);
 
 // Debug tools
 // void    print_cmds(t_cmd *cmds);

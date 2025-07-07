@@ -6,7 +6,7 @@
 /*   By: jaloulid <jaloulid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 23:39:56 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/06/20 22:34:35 by jaloulid         ###   ########.fr       */
+/*   Updated: 2025/07/06 21:12:51 by jaloulid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,7 @@ int main(int ac, char **av, char **envp)
 			break ;
 		tokens = lexer(line);
 		cmds = parse_tokens(tokens);
-		// if (cmds && cmds->args && cmds->args[0])
-		// 	printf("%s\n", cmds->args[0]);
+		// printf("%s\n", cmds->args[5]);	
 		// else
 		// 	printf("cmds or cmds-> is NULL\n");
 		// // if (!cmds)
