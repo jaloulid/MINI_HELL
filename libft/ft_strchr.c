@@ -3,39 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaloulid <jaloulid@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 01:01:26 by jaloulid          #+#    #+#             */
-/*   Updated: 2024/11/22 10:11:51 by jaloulid         ###   ########.fr       */
+/*   Created: 2024/11/05 15:21:53 by yoessedr          #+#    #+#             */
+/*   Updated: 2024/11/11 14:59:15 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int i)
 {
-	int	i;
-	int	cfound;
+	char	b;
+	int		j;
 
-	i = 0;
-	cfound = 0;
-	while (s[i])
+	b = (char)i;
+	j = 0;
+	while (s[j])
 	{
-		if (((unsigned char *)s)[i] == (unsigned char)c)
-		{
-			cfound = 1;
-			break ;
-		}
-		else
-			i++;
+		if (s[j] == b)
+			return ((char *)(s + j));
+		j++;
 	}
-	if (cfound == 0 && (unsigned char)c != 0)
-		return (NULL);
-	return ((char *)&(((unsigned char *)s)[i]));
+	if (b == '\0')
+		return ((char *)(s + j));
+	return (0);
 }
-
-/*int main()
-{
-	char ss[] = "rake tema";
-	printf("%s", ft_strchr(ss, 97));
-}*/

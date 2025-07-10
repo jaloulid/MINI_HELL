@@ -3,38 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaloulid <jaloulid@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 01:02:07 by jaloulid          #+#    #+#             */
-/*   Updated: 2024/11/22 00:29:53 by jaloulid         ###   ########.fr       */
+/*   Created: 2024/11/05 15:48:54 by yoessedr          #+#    #+#             */
+/*   Updated: 2024/11/09 16:00:34 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
 	size_t	i;
-	size_t	res;
 
 	i = 0;
-	res = ft_strlen(src);
-	if (dstsize > 0)
+	if (size == 0)
+		return (ft_strlen(src));
+	while (i < size - 1 && src[i])
 	{
-		while (i < dstsize - 1 && src[i])
-		{
-			dest[i] = src[i];
-			i++;
-		}
-		dest[i] = '\0' ;
+		dest[i] = src[i];
+		i++;
 	}
-	return (res);
+	dest[i] = '\0';
+	return (ft_strlen(src));
 }
-
-// int main()
-// {
-// 	char src[]= "fatal tigers";
-// 	char dest[5]= "";
-// 	printf("%zu\n", ft_strlcpy(dest, src, 5));
-// 	printf("%s\n%s\n", dest, src);	
-// }

@@ -6,7 +6,7 @@
 /*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 17:32:18 by yoessedr          #+#    #+#             */
-/*   Updated: 2025/07/10 16:43:19 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/07/10 19:00:52 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,19 @@ int exec_external(char **cmd, char **env)
 }
 int exec_builtin(char **cmd, t_node **env)
 {
-	if (strcmp(cmd[0], "cd") == 0)
+	if (ft_strcmp(cmd[0], "cd") == 0)
 		return (ft_cd(cmd[1]));
-	else if (strcmp(cmd[0], "echo") == 0)
+	else if (ft_strcmp(cmd[0], "echo") == 0)
 		return (ft_echo(cmd));
-	else if (strcmp(cmd[0], "exit") == 0)
+	else if (ft_strcmp(cmd[0], "exit") == 0)
 		exit(EXIT_SUCCESS);
-	else if (strcmp(cmd[0], "pwd") == 0)
+	else if (ft_strcmp(cmd[0], "pwd") == 0)
 		return (ft_pwd(cmd));
-	else if (strcmp(cmd[0], "env") == 0)
+	else if (ft_strcmp(cmd[0], "env") == 0)
 		return (ft_env(*env));
-	else if (strcmp(cmd[0], "export") == 0)
+	else if (ft_strcmp(cmd[0], "export") == 0)
 		return (ft_export(cmd, env));
-	else if (strcmp(cmd[0], "unset") == 0)
+	else if (ft_strcmp(cmd[0], "unset") == 0)
 		return (ft_unset(env, cmd[1]));
 	else
 	{
@@ -62,9 +62,9 @@ int exec_builtin(char **cmd, t_node **env)
 		return -1;
 	}
 }
-int exec_cmd(char **args, t_node **env)
+int exec_cmd(t_cmd args, t_node **env)
 {
-	if (!args || !args[0])
+	if (!args || !args->[0])
 	{
 		fprintf(stderr, "No command provided\n");
 		return -1;
@@ -77,13 +77,13 @@ int exec_cmd(char **args, t_node **env)
 			fprintf(stderr, "Command not found: %s\n", args[0]);
 			return -1;
 		}
-	if(*(args)->redir->type != NULL && *(args)->redir->file != NULL )
+	if (args && *args && (*args)->redir && (*args)->redir->type != NULL && (*args)->redir->file != NULL)
 	{
-		if (handle_files(args, env) == -1)
-		{
-			fprintf(stderr, "Error handling files\n");
-			return -1;
-		}
+    	if (handle_files(args, env) == -1)
+    	{
+        	fprintf(stderr, "Error handling files\n");
+        	return -1;
+    	}
 	}
 	if ((!is_builtin(args[0])) == 0)
 		return (exec_builtin(args, env));
@@ -98,12 +98,11 @@ int is_builtin(char *cmd)
 {
 	if (!cmd)
 		return 0;
-	return (!strcmp(cmd, "cd") ||
-			!strcmp(cmd, "echo") ||
-			!strcmp(cmd, "pwd") ||
-			!strcmp(cmd, "exit") ||
-			!strcmp(cmd, "env") ||
-			!strcmp(cmd, "export") ||
-			!strcmp(cmd, "unset"));
+	return (!ft_strcmp(cmd, "cd") ||
+			!ft_strcmp(cmd, "echo") ||
+			!ft_strcmp(cmd, "pwd") ||
+			!ft_strcmp(cmd, "exit") ||
+			!ft_strcmp(cmd, "env") ||
+			!ft_strcmp(cmd, "export") ||
+			!ft_strcmp(cmd, "unset"));
 }
-

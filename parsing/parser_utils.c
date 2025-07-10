@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaloulid <jaloulid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 18:06:36 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/06/16 17:14:15 by jaloulid         ###   ########.fr       */
+/*   Updated: 2025/07/10 18:43:39 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,6 @@ t_redir *new_redir(char *file, t_redir_type type)
 void    redir_add_back(t_redir **lst, t_redir *new)
 {
     t_redir *tmp;
-    printf("hello 1////////////////////////////// \n");
-    printf("---->>>>  %s --------------------> %d", new->file, new->type);
-
     
     if (!*lst)
     {

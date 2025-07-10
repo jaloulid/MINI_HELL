@@ -28,6 +28,13 @@
 
 extern int g_exit_status;
 
+typedef struct s_node
+{
+    char *key;
+    char *value;
+    struct s_node *next;
+} t_node;
+
 typedef enum e_token_type
 {
 	WORD,
@@ -46,14 +53,14 @@ typedef struct s_token
 }	t_token;
 
 //lexer functions
-t_token	*lexer(char *line);
-t_token *new_token(char *value, t_token_type type);
-void	add_back(t_token **list, t_token *new);
+t_token			*lexer(char *line);
+t_token 		*new_token(char *value, t_token_type type);
+void			add_back(t_token **list, t_token *new);
 t_token_type	get_token_type(char *s);
-int get_word_len(char *line);
-void    handle_word(char *line, int *i, t_token **list);
-void    free_token_list(t_token *list);
-void    handle_operator(char *line, int *i, t_token **list);
+int 			get_word_len(char *line);
+void    		handle_word(char *line, int *i, t_token **list);
+void    		free_token_list(t_token *list);
+void    		handle_operator(char *line, int *i, t_token **list);
 
 //PARSER STRUCTER
 typedef enum e_redir_type
@@ -88,12 +95,6 @@ typedef struct s_cmd
 	struct	s_cmd *next;	
 }	t_cmd;
 
-typedef struct s_node
-{
-    char *key;
-    char *value;
-    struct s_node *next;
-} t_node;
 
 typedef struct s_fd
 {
@@ -114,7 +115,7 @@ int     only_digit(char *str);
 int		ft_export(char **av, t_node **env);
 int     exec_external(char **cmd, char **env);
 int	 	is_builtin(char *cmd);
-int     exec_cmd(char **args, t_node **env);
+int		exec_cmd(char **args, t_node **env);
 int     exec_builtin(char **cmd, t_node **env);
 char    **find_paths(char **env);
 char    *check_path(char *cmd, t_node **env);
@@ -126,7 +127,7 @@ int     pipe_number(t_cmd *cmds);
 void    swap_env_nodes(t_node *a, t_node *b);
 int     exec_pipe(t_cmd *cmds,t_node **env);
 t_cmd	*parse_tokens(t_token *tokens);
-void	expand_cmds(t_cmd *cmds, t_node **env, int exit_status);
+void	expand_cmds(t_cmd *cmds, t_node **env, int status);
 t_cmd	*new_cmd(void);
 void	free_cmd_list(t_cmd *cmds);
 char    *get_env_value(t_node *env, char *key);
@@ -134,6 +135,14 @@ char 	**env_list_to_array(t_node **env);
 int		open_filee(char *filename, t_file_mode mode);
 int		handle_files(t_redir *file, t_node **env);
 int 	open_file(const char *filename, int flags);
+t_redir *new_redir(char *file, t_redir_type type);
+char    *append_char(char *base, char c);
+void    redir_add_back(t_redir **lst, t_redir *new);
+char    *expand_dollar(const char *str, int *i, t_node *env, int last_exit);
+void    cmd_add_back(t_cmd **lst, t_cmd *new);
+char    *append_str(char *base, char *add);
+char    *expand_var(char *str, t_node *env, int last_exit);
+
 
 
 
