@@ -18,6 +18,13 @@
 #include "readline/history.h"
 
 #define BUFFER_SIZE 1024
+#ifndef REDIRECT_IN
+#define REDIRECT_IN 0
+#endif
+
+#ifndef REDIRECT_OUT
+#define REDIRECT_OUT 1
+#endif
 
 extern int g_exit_status;
 
@@ -60,6 +67,13 @@ typedef enum e_redir_type
 	R_HEREDOC
 }	t_redir_type;
 
+typedef enum e_file_mode
+{
+	READ_MODE,
+	WRITE_TRUNC_MODE,
+	WRITE_APPEND_MODE
+}	t_file_mode;
+
 typedef struct s_redir
 {
 	char	*file;
@@ -81,6 +95,11 @@ typedef struct s_node
     struct s_node *next;
 } t_node;
 
+typedef struct s_fd
+{
+    int in_fd;
+    int out_fd;
+}   t_fd;
 int		ft_echo(char **argv);
 int		ft_cd(char *command);
 int		ft_pwd(char **av);
@@ -94,24 +113,28 @@ t_node  *return_address(char *str, t_node **env);
 int     only_digit(char *str);
 int		ft_export(char **av, t_node **env);
 int     exec_external(char **cmd, char **env);
-int     ft_search(char *str, char **env);
-int     exec_cmd(char **args, char **env);
+int	 	is_builtin(char *cmd);
+int     exec_cmd(char **args, t_node **env);
 int     exec_builtin(char **cmd, t_node **env);
 char    **find_paths(char **env);
-char    *check_path(char *cmd, char **env);
+char    *check_path(char *cmd, t_node **env);
 int     ft_exit(char **av, t_node **env);
 int     ft_env(t_node *env);
 int     ft_search_env(char *str, t_node *env);
-int     exec_pipes(t_cmd *cmds, char **env);
+int     exec_pipes(t_cmd *cmds, t_node **env);
 int     pipe_number(t_cmd *cmds);
 void    swap_env_nodes(t_node *a, t_node *b);
-int     exec_pipe(t_cmd *cmds, char **env);
+int     exec_pipe(t_cmd *cmds,t_node **env);
 t_cmd	*parse_tokens(t_token *tokens);
 void	expand_cmds(t_cmd *cmds, t_node **env, int exit_status);
 t_cmd	*new_cmd(void);
 void	free_cmd_list(t_cmd *cmds);
 char    *get_env_value(t_node *env, char *key);
-char 	**env_list_to_array(t_node *env);
+char 	**env_list_to_array(t_node **env);
+int		open_filee(char *filename, t_file_mode mode);
+int		handle_files(t_redir *file, t_node **env);
+int 	open_file(const char *filename, int flags);
+
 
 
 #endif

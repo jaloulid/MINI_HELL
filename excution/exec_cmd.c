@@ -6,28 +6,13 @@
 /*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 17:32:18 by yoessedr          #+#    #+#             */
-/*   Updated: 2025/06/21 16:18:50 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/07/10 09:58:16 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void	exec_cmd(t_cmd *cmd, t_env *env)
-// {
-// 	if (cmd->type == CMD_BUILTIN)
-// 	{
-// 		exec_builtin(cmd, env);
-// 	}
-// 	else if (cmd->type == CMD_EXTERNAL)
-// 	{
-// 		exec_external(cmd, env);
-// 	}
-// 	else
-// 	{
-// 		fprintf(stderr, "Unknown command type\n");
-// 		exit(EXIT_FAILURE);
-// 	}
-// }
+
 int exec_external(char **cmd, char **env)
 {
 	pid_t pid;
@@ -77,35 +62,48 @@ int exec_builtin(char **cmd, t_node **env)
 		return -1;
 	}
 }
-int exec_cmd(char **cmd, char **env)
+int exec_cmd(char **args, t_node **env)
 {
-	if (!cmd || !cmd[0])
+	if (!args || !args[0])
 	{
 		fprintf(stderr, "No command provided\n");
 		return -1;
 	}
-	char *path = check_path(cmd[0], env);
+	char *path = check_path(args[0], env);
 	if (path)
-		cmd[0] = path;
+		args[0] = path;
 		else
 		{
-			fprintf(stderr, "Command not found: %s\n", cmd[0]);
+			fprintf(stderr, "Command not found: %s\n", args[0]);
 			return -1;
 		}
-	if (exec_builtin(cmd, env) == 0)
-		return 0;
-	else
-		return exec_external(cmd, NULL);
-}
-
-int ft_search(char *str,char  **env)
-{
-
-	while (*env)
+	if(*(args)->redir->type != NULL && *args->redir->file != NULL )
 	{
-		if (strncmp(*env, str, strlen(str)) == 0 && (*env)[strlen(str)] == '=')
-			return 0;
-		env++;
+		if (handle_files(args, env) == -1)
+		{
+			fprintf(stderr, "Error handling files\n");
+			return -1;
+		}
 	}
-	return -1;
+	if ((!is_builtin(args[0])) == 0)
+		return (exec_builtin(args, env));
+	else
+	{
+		char **env_array = env_list_to_array(env);
+		return exec_external(args, env_array);
+	}
 }
+
+int is_builtin(char *cmd)
+{
+	if (!cmd)
+		return 0;
+	return (!strcmp(cmd, "cd") ||
+			!strcmp(cmd, "echo") ||
+			!strcmp(cmd, "pwd") ||
+			!strcmp(cmd, "exit") ||
+			!strcmp(cmd, "env") ||
+			!strcmp(cmd, "export") ||
+			!strcmp(cmd, "unset"));
+}
+

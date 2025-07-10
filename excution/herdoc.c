@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-int	open_file(char *filename, t_file_mode mode)
+int	open_filee(char *filename, t_file_mode mode)
 {
 	int	flags;
 	int	fd;

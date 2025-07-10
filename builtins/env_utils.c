@@ -6,7 +6,7 @@
 /*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 22:27:37 by yoessedr          #+#    #+#             */
-/*   Updated: 2025/06/21 16:03:08 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/06/22 07:06:10 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,10 @@ t_node *env_init(char **env)
 // env_add_back(head, env_new(key, value))
 
 // env
-char **env_list_to_array(t_node *env)
+char **env_list_to_array(t_node **env)
 {
     int count = 0;
-    t_node *tmp = env;
+    t_node *tmp = (*env);
 
     while (tmp)
     {
@@ -120,7 +120,7 @@ char **env_list_to_array(t_node *env)
     char **envp = malloc(sizeof(char *) * (count + 1));
     if (!envp)
         return NULL;
-    tmp = env;
+    tmp = (*env);
     int i = 0;
     while (tmp)
     {

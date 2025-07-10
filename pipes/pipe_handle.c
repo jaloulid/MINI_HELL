@@ -6,7 +6,7 @@
 /*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 22:28:01 by yoessedr          #+#    #+#             */
-/*   Updated: 2025/06/21 17:23:38 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/06/22 06:52:55 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 #include <stdio.h>
 
 
-int exec_pipes(t_cmd *cmds, char **env)
+int exec_pipes(t_cmd *cmds, t_node **env)
 {
 	int		pipe_fd[2];
 	int		input_fd = 0;
 	pid_t	pid;
 	int		status;
-
+	
 	while (cmds)
 	{
 		if (cmds->next != NULL)

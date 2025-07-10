@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaloulid <jaloulid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 06:05:49 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/06/20 17:32:45 by jaloulid         ###   ########.fr       */
+/*   Updated: 2025/06/22 06:31:22 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 # include <stdlib.h>
 # include "libft/libft.h"
 
-//LEXER STRUCT
+extern int g_exit_status;
+
 typedef enum e_token_type
 {
 	WORD,

@@ -6,7 +6,7 @@
 /*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 22:27:46 by yoessedr          #+#    #+#             */
-/*   Updated: 2025/06/21 00:18:29 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/06/22 07:02:51 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,18 @@ char **find_paths(char **env)
     free(path);
     return (paths);
 }
-char *check_path(char *cmd, char **env)
+char *check_path(char *cmd, t_node **env)
 {
-    char **paths = find_paths(env);
+    char **env_array = NULL;
+    char **paths = NULL;
     char *full_path = NULL;
-    int i = 0;
-
+    int   i;
+    
+    env_array = env_list_to_array(env);
+    paths = find_paths(env_array);
     if (!paths)
         return (NULL);
+    i = 0;
     while (paths[i])
     {
         full_path = ft_strjoin(paths[i], "/");
