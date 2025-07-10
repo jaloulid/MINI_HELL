@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   lexer_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaloulid <jaloulid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 15:54:11 by yoessedr          #+#    #+#             */
-/*   Updated: 2024/11/11 10:25:48 by yoessedr         ###   ########.fr       */
+/*   Created: 2025/05/08 20:02:41 by jaloulid          #+#    #+#             */
+/*   Updated: 2025/05/29 20:11:49 by jaloulid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_tolower(int c)
+void    free_token_list(t_token *list)
 {
-	if (c >= 'A' && c <= 'Z')
-		return (c += 32);
-	return (c);
+    t_token *tmp;
+    
+    while (list)
+    {
+        tmp = list->next;
+        free(list->value);
+        free(list);
+        list = tmp;
+    }
 }

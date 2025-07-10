@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   env_helper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 15:19:44 by yoessedr          #+#    #+#             */
-/*   Updated: 2024/11/11 14:36:05 by yoessedr         ###   ########.fr       */
+/*   Created: 2025/05/30 23:39:18 by jaloulid          #+#    #+#             */
+/*   Updated: 2025/06/21 00:30:47 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+char    *get_env_value(t_node *env, char *key)
 {
-	size_t			i;
-	unsigned char	*g;
-	unsigned char	*b;
-
-	if (!dest && !src)
-		return (NULL);
-	i = 0;
-	g = (unsigned char *)dest;
-	b = (unsigned char *)src;
-	while (i < n)
-	{
-		g[i] = b[i];
-		i++;
-	}
-	return (g);
+    while (env)
+    {
+        if (ft_strcmp(env->key, key) == 0)
+            return (env->value);
+        env = env->next;
+    }
+    return (NULL);
 }
-/*
-int main()
-{
-	char *b = memcpy(((void *)0), ((void *)0), 3);
-	printf("%s\n", b);
-}*/
