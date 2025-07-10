@@ -6,7 +6,7 @@
 /*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 17:32:18 by yoessedr          #+#    #+#             */
-/*   Updated: 2025/07/10 09:58:16 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/07/10 16:43:19 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int exec_cmd(char **args, t_node **env)
 			fprintf(stderr, "Command not found: %s\n", args[0]);
 			return -1;
 		}
-	if(*(args)->redir->type != NULL && *args->redir->file != NULL )
+	if(*(args)->redir->type != NULL && *(args)->redir->file != NULL )
 	{
 		if (handle_files(args, env) == -1)
 		{
