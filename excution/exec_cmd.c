@@ -6,7 +6,7 @@
 /*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 17:32:18 by yoessedr          #+#    #+#             */
-/*   Updated: 2025/07/11 21:15:27 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/07/11 21:31:26 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,21 @@ int exec_cmd(t_cmd *arg, t_node **env)
 		return (exec_builtin(args, env));
 	else
 	{
-		char *path = check_path(args[0], env);
-		if (path)
-			args[0] = path;
-		else
+		if(args[0][0] != '/')
+	{
+			char *path = check_path(args[0], env);
+			if (path)
+				args[0] = path;
+			else
+			{
+				fprintf(stderr, "Command not found: %s\n", args[0]);
+				g_exit_status = 127;
+			}
+		}
+		else if (args[0][0] == '/' && access(args[0], F_OK) == -1)
 		{
 			fprintf(stderr, "Command not found: %s\n", args[0]);
-			return -1;
+			g_exit_status = 127;
 		}
 		if (arg && arg->redirect && arg->redirect->type && arg->redirect->file != NULL)
 		{
