@@ -6,7 +6,7 @@
 /*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 22:45:52 by yoessedr          #+#    #+#             */
-/*   Updated: 2025/07/11 15:21:39 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/07/11 21:03:20 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,35 @@ int open_file(const char *filename, int flags)
         return (-1);
     }
     return (fd);
+}
+
+int close_file(int fd)
+{
+    if (close(fd) < 0)
+    {
+        perror("Error closing file");
+        return (-1);
+    }
+    return (0);
+}
+//how to dup the file and redirect it to stdin or stdout
+int redirect_file(int fd, int mode)
+{
+    if (mode == READ_MODE)
+    {
+        if (dup2(fd, STDIN_FILENO) < 0)
+        {
+            perror("Error redirecting stdin");
+            return (-1);
+        }
+    }
+    else if (mode == WRITE_TRUNC_MODE || mode == WRITE_APPEND_MODE)
+    {
+        if (dup2(fd, STDOUT_FILENO) < 0)
+        {
+            perror("Error redirecting stdout");
+            return (-1);
+        }
+    }
+    return (0);
 }

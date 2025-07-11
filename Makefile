@@ -10,7 +10,7 @@ file_management/handle_files.c
 OBJ = $(SRC:.c=.o)
 
 CC = cc
-CFLAGS =  #fsanitize=address -g3 
+CFLAGS =  #-fsanitize=address -g3 
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a

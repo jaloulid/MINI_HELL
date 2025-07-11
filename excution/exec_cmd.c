@@ -6,7 +6,7 @@
 /*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 17:32:18 by yoessedr          #+#    #+#             */
-/*   Updated: 2025/07/11 15:14:54 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/07/11 21:15:27 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int exec_builtin(char **cmd, t_node **env)
 		return (ft_pwd(cmd));
 	else if (ft_strcmp(cmd[0], "env") == 0)
 		return (ft_env(*env));
-	else if (ft_strcmp(cmd[0], "export") == 0)
+	else if (ft_strcmp(cmd[0], "export")== 0)
 		return (ft_export(cmd, env));
 	else if (ft_strcmp(cmd[0], "unset") == 0)
 		return (ft_unset(env, cmd[1]));
@@ -71,30 +71,32 @@ int exec_cmd(t_cmd *arg, t_node **env)
 		fprintf(stderr, "No command provided\n");
 		return -1;
 	}
-	char *path = check_path(args[0], env);
-	if (path)
-		args[0] = path;
+	if ((!is_builtin(args[0])) == 0)
+		return (exec_builtin(args, env));
+	else
+	{
+		char *path = check_path(args[0], env);
+		if (path)
+			args[0] = path;
 		else
 		{
 			fprintf(stderr, "Command not found: %s\n", args[0]);
 			return -1;
 		}
-	if (arg && arg->redirect && arg->redirect->type && arg->redirect->file != NULL)
-	{
-    	if (handle_files(arg->redirect, env) == -1)
-    	{
-        	fprintf(stderr, "Error handling files\n");
-        	return -1;
-    	}
-	}
-	if ((!is_builtin(args[0])) == 0)
-		return (exec_builtin(args, env));
-	else
-	{
+		if (arg && arg->redirect && arg->redirect->type && arg->redirect->file != NULL)
+		{
+			if (handle_files(arg->redirect, env) == -1)
+			{
+				fprintf(stderr, "Error handling files\n");
+				return -1;
+			}
+		}
 		char **env_array = env_list_to_array(env);
 		return exec_external(args, env_array);
 	}
-}
+		
+	}
+	
 
 int is_builtin(char *cmd)
 {

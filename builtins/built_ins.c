@@ -6,12 +6,13 @@
 /*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 22:27:57 by yoessedr          #+#    #+#             */
-/*   Updated: 2025/06/18 23:53:43 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/07/11 16:04:07 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+//hna f makhasch it affichaw quotes
+//expand mazal makhedamch
 int	ft_echo(char **argv)
 {
     int newline;
