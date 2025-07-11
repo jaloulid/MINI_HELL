@@ -6,7 +6,7 @@
 /*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 22:45:52 by yoessedr          #+#    #+#             */
-/*   Updated: 2025/07/10 09:51:54 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/07/11 15:21:39 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int    handle_files(t_redir *file, t_node **env)
         }
         else if (redirect->type == R_OUT)
         {
+            // printf(""); hna mali kanredircti lfile maki3tinich bli mseti r_out
             if (open_file(redirect->file, O_WRONLY | O_CREAT | O_TRUNC) == -1)
                 return (-1);
         }

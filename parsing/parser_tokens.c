@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parcer_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaloulid <jaloulid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 23:40:14 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/07/06 21:11:26 by jaloulid         ###   ########.fr       */
+/*   Updated: 2025/07/11 15:02:22 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int parse_one_token(t_token *tokens, t_cmd **current, t_cmd **cmds)
 {

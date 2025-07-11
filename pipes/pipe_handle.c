@@ -6,7 +6,7 @@
 /*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 22:28:01 by yoessedr          #+#    #+#             */
-/*   Updated: 2025/06/22 06:52:55 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/07/11 15:09:53 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int exec_pipes(t_cmd *cmds, t_node **env)
 				close(pipe_fd[0]);
 				close(pipe_fd[1]);
 			}
-			exec_cmd(cmds->args, env);
+			exec_cmd(cmds, env);
 			exit(EXIT_FAILURE); 
 		}
 		else

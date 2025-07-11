@@ -6,7 +6,7 @@
 /*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 17:32:18 by yoessedr          #+#    #+#             */
-/*   Updated: 2025/07/10 19:00:52 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/07/11 15:14:54 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,11 @@ int exec_builtin(char **cmd, t_node **env)
 		return -1;
 	}
 }
-int exec_cmd(t_cmd args, t_node **env)
+int exec_cmd(t_cmd *arg, t_node **env)
 {
-	if (!args || !args->[0])
+	char **args = arg->args;
+	
+	if (!args || !args[0])
 	{
 		fprintf(stderr, "No command provided\n");
 		return -1;
@@ -77,9 +79,9 @@ int exec_cmd(t_cmd args, t_node **env)
 			fprintf(stderr, "Command not found: %s\n", args[0]);
 			return -1;
 		}
-	if (args && *args && (*args)->redir && (*args)->redir->type != NULL && (*args)->redir->file != NULL)
+	if (arg && arg->redirect && arg->redirect->type && arg->redirect->file != NULL)
 	{
-    	if (handle_files(args, env) == -1)
+    	if (handle_files(arg->redirect, env) == -1)
     	{
         	fprintf(stderr, "Error handling files\n");
         	return -1;

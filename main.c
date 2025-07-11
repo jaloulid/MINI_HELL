@@ -6,7 +6,7 @@
 /*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 23:39:56 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/07/10 18:55:57 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/07/11 15:25:35 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,13 @@ int main(int ac, char **av, char **envp)
 		add_history(line);
 		tokens = lexer(line);
 		cmds = parse_tokens(tokens);
+		printf("hna type : %u\n", cmds->redirect->type);
+		while(cmds->args)
+		{
+			printf("")
+		}
 		if(pipe_number(cmds) == 1 && cmds->redirect == NULL)
-			g_exit_status = exec_cmd(cmds->args, &env);
+			g_exit_status = exec_cmd(cmds, &env);
 		else
 			g_exit_status = exec_pipes(cmds, &env);
 		if (g_exit_status == -1)

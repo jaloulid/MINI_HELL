@@ -115,7 +115,7 @@ int     only_digit(char *str);
 int		ft_export(char **av, t_node **env);
 int     exec_external(char **cmd, char **env);
 int	 	is_builtin(char *cmd);
-int		exec_cmd(char **args, t_node **env);
+int		exec_cmd(t_cmd *arg, t_node **env);
 int     exec_builtin(char **cmd, t_node **env);
 char    **find_paths(char **env);
 char    *check_path(char *cmd, t_node **env);
@@ -127,7 +127,7 @@ int     pipe_number(t_cmd *cmds);
 void    swap_env_nodes(t_node *a, t_node *b);
 int     exec_pipe(t_cmd *cmds,t_node **env);
 t_cmd	*parse_tokens(t_token *tokens);
-void	expand_cmds(t_cmd *cmds, t_node **env, int status);
+void	expand_cmds(t_cmd *cmds, t_node *env, int status);
 t_cmd	*new_cmd(void);
 void	free_cmd_list(t_cmd *cmds);
 char    *get_env_value(t_node *env, char *key);
@@ -142,6 +142,13 @@ char    *expand_dollar(const char *str, int *i, t_node *env, int last_exit);
 void    cmd_add_back(t_cmd **lst, t_cmd *new);
 char    *append_str(char *base, char *add);
 char    *expand_var(char *str, t_node *env, int last_exit);
+int		parse_one_token(t_token *tokens, t_cmd **current, t_cmd **cmds);
+void    parse_init_cmd(t_cmd **current, t_cmd **cmds);
+void    parse_handle_pipe(t_cmd **current);
+void    parse_word_token(t_token **tokens, t_cmd *cmd);
+int		is_redirect(t_token *token);
+int 	check_pipe_syntax(t_token *tokens);
+int 	parse_redirect_token(t_token **tokens, t_cmd *cmd, t_cmd **cmds);
 
 
 
