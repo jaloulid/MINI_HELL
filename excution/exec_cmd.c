@@ -6,7 +6,7 @@
 /*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 17:32:18 by yoessedr          #+#    #+#             */
-/*   Updated: 2025/07/11 21:31:26 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/07/12 20:08:53 by yoessedr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,31 @@ int exec_builtin(char **cmd, t_node **env)
 int exec_cmd(t_cmd *arg, t_node **env)
 {
 	char **args = arg->args;
-	
+	int pid;
+
 	if (!args || !args[0])
 	{
 		fprintf(stderr, "No command provided\n");
 		return -1;
 	}
 	if ((!is_builtin(args[0])) == 0)
-		return (exec_builtin(args, env));
+	{
+    	pid = fork();
+		if (pid == 0)
+		{
+			if (arg && arg->redirect && arg->redirect->type && arg->redirect->file != NULL)
+			{
+			
+				if (handle_files(arg->redirect, env) == -1)
+				{
+					fprintf(stderr, "Error handling files\n");
+					return -1;
+				}
+			}
+			return (exec_builtin(args, env));
+		}
+		waitpid(pid, &g_exit_status, NULL);
+	}
 	else
 	{
 		if(args[0][0] != '/')
@@ -102,8 +119,9 @@ int exec_cmd(t_cmd *arg, t_node **env)
 		char **env_array = env_list_to_array(env);
 		return exec_external(args, env_array);
 	}
-		
-	}
+	return 0;
+}
+
 	
 
 int is_builtin(char *cmd)
