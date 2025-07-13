@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_helper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaloulid <jaloulid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 23:39:18 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/06/21 00:30:47 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/07/13 03:54:22 by jaloulid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 char    *get_env_value(t_node *env, char *key)
 {

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parcer_tokens.c                                    :+:      :+:    :+:   */
+/*   parser_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaloulid <jaloulid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 23:40:14 by jaloulid          #+#    #+#             */
-/*   Updated: 2025/07/11 15:02:22 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/07/13 04:43:44 by jaloulid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 int parse_one_token(t_token *tokens, t_cmd **current, t_cmd **cmds)
 {
@@ -23,7 +23,7 @@ int parse_one_token(t_token *tokens, t_cmd **current, t_cmd **cmds)
     else if (is_redirect(tokens))
         {
             parse_init_cmd(current, cmds);
-            if (!parse_redirect_token(&tokens, *current, cmds))
+            if (!parse_redirect_token(&tokens, *current))
                 return (0);
             return (1);
         }
