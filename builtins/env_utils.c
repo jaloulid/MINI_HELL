@@ -73,7 +73,6 @@ t_node *env_init(char **env)
    int len = 0;
    
    new_node = head;
-  
    while(*env)
    {
     
@@ -81,16 +80,7 @@ t_node *env_init(char **env)
     len = found - *env;
     key = ft_substr(*env, 0, len);
     value = ft_strdup(found + 1);
-
 	new_node = env_add_new(key, value);
-
-
-    // char * key = ft_substr(*env, 0, len);
-    // char *value =  ft_strdup(found + 1);
-  //  t_node = env_new(key, value) ;
-  // env_add_back(**head, env_new(key, value))
-
-
     // if((*env + 1))
     env_add_back(&head, new_node);
     env++;
@@ -98,15 +88,6 @@ t_node *env_init(char **env)
    return head;
 }
 
-
-
-
-// export katziid lik wahd env felkher 
-
-// export variable="youssef" -===>  key = variable ,  value = "youssef"
-// env_add_back(head, env_new(key, value))
-
-// env
 char **env_list_to_array(t_node **env)
 {
     int count = 0;
