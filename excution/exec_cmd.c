@@ -88,7 +88,7 @@ int exec_cmd(t_cmd *arg, t_node **env)
 			}
 			return (exec_builtin(args, env));
 		}
-		waitpid(pid, &g_exit_status, NULL);
+		waitpid(pid, &g_exit_status, 0);
 	}
 	else
 	{

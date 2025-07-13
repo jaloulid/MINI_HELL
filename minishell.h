@@ -26,6 +26,8 @@
 #define REDIRECT_OUT 1
 #endif
 
+#define NULL ((void*)0)
+
 extern int g_exit_status;
 
 typedef struct s_node
@@ -149,6 +151,7 @@ void    parse_word_token(t_token **tokens, t_cmd *cmd);
 int		is_redirect(t_token *token);
 int 	check_pipe_syntax(t_token *tokens);
 int 	parse_redirect_token(t_token **tokens, t_cmd *cmd, t_cmd **cmds);
+int		redirect_file(int fd, int mode);
 
 
 
