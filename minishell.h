@@ -26,8 +26,6 @@
 #define REDIRECT_OUT 1
 #endif
 
-#define NULL ((void*)0)
-
 extern int g_exit_status;
 
 typedef struct s_node
