@@ -150,6 +150,7 @@ int		is_redirect(t_token *token);
 int 	check_pipe_syntax(t_token *tokens);
 int 	parse_redirect_token(t_token **tokens, t_cmd *cmd);
 int		redirect_file(int fd, int mode);
+void	sigint_handler(int sig);
 
 
 
