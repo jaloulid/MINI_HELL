@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nesta <nesta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 22:27:37 by yoessedr          #+#    #+#             */
-/*   Updated: 2025/06/22 07:06:10 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/07/15 00:12:33 by nesta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,14 @@ char **env_list_to_array(t_node **env)
         tmp = tmp->next;
         i++;
     }
+    // while((*env))
+    // {
+    //     free((*env)->key);
+    //     free((*env)->value);
+    //     free((*env));
+    //     (*env) = (*env)->next;
+    // }
+    // free(env);
     envp[i] = NULL;
     return envp;
 }

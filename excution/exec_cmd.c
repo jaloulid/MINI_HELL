@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoessedr <yoessedr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nesta <nesta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 17:32:18 by yoessedr          #+#    #+#             */
-/*   Updated: 2025/07/13 21:51:00 by yoessedr         ###   ########.fr       */
+/*   Updated: 2025/07/15 00:10:12 by nesta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	handle_redirects(t_cmd *arg, t_node **env)
 	{
 		if (handle_files(arg->redirect, env) == -1)
 		{
-			fprintf(stderr, "Error handling files\n");
+			ft_putendl_fd("Error handling files", 2);
 			return (-1);
 		}
 	}
@@ -110,11 +110,13 @@ int	validate_external_command(char **args, t_node **env)
 	}
 	else if (access(args[0], F_OK) == -1)
 	{
+		free(path);
 		ft_putstr_fd("Command not found :", 2);
 		ft_putendl_fd(args[0],2);
 		g_exit_status = 127;
 		return (-1);
 	}
+	free(path);
 	return (0);
 }
 
