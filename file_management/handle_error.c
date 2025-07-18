@@ -15,9 +15,9 @@
 int print_error(char *prefix, char *filename)
 {
     if (prefix)
-        fprintf(stderr, "%s: ", prefix);
+        ft_putendl_fd(prefix, 2);
     if (filename)
-        fprintf(stderr, "%s: ", filename);
+        ft_putendl_fd(filename, 2);
     perror("Error");
     return (1);
 }

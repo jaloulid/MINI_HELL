@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int    handle_files(t_redir *file, t_node **env)
+int    handle_files(t_redir *file)
 {
     t_redir *redirect;
     int fd; 

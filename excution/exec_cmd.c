@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 
-int exec_external(char **cmd, char **env)
+int exec_external(t_cmd *cmd, char **env)
 {
 	pid_t pid;
 	int status;
@@ -26,7 +26,9 @@ int exec_external(char **cmd, char **env)
 	}
 	else if (pid == 0)
 	{
-		if (execve(cmd[0], cmd, env) < 0)
+		if (handle_redirects(cmd) == -1)
+			return (-1);
+		if (execve(cmd->args[0], cmd->args, env) < 0)
 		{
 			g_exit_status = 127;
 			exit(EXIT_FAILURE);
@@ -64,11 +66,11 @@ int exec_builtin(char **cmd, t_node **env)
 	}
 	return(g_exit_status);
 }
-int	handle_redirects(t_cmd *arg, t_node **env)
+int	handle_redirects(t_cmd *arg)
 {
 	if (arg && arg->redirect && arg->redirect->type && arg->redirect->file)
 	{
-		if (handle_files(arg->redirect, env) == -1)
+		if (handle_files(arg->redirect) == -1)
 		{
 			ft_putendl_fd("Error handling files", 2);
 			return (-1);
@@ -84,7 +86,7 @@ int	run_builtin(t_cmd *arg, t_node **env, char **args)
 	pid = fork();
 	if (pid == 0)
 	{
-		if (handle_redirects(arg, env) == -1)
+		if (handle_redirects(arg) == -1)
 			exit(1);
 		exit(exec_builtin(args, env));
 	}
@@ -110,35 +112,34 @@ int	validate_external_command(char **args, t_node **env)
 	}
 	else if (access(args[0], F_OK) == -1)
 	{
-		free(path);
+		// free(path);
 		ft_putstr_fd("Command not found :", 2);
 		ft_putendl_fd(args[0],2);
 		g_exit_status = 127;
 		return (-1);
 	}
-	free(path);
+	// free(path);
 	return (0);
 }
 
 int	exec_cmd(t_cmd *arg, t_node **env)
 {
-	char	**args;
 	char	**env_array;
 
-	args = arg->args;
-	if (!args || !args[0])
+	if (!arg->args || !arg->args[0])
 	{
 		ft_putendl_fd("No command provided", 2);
 		g_exit_status = 127;
 	}
-	if (is_builtin(args[0]))
-		return (run_builtin(arg, env, args));
-	if (validate_external_command(args, env) == -1)
-		return (-1);
-	if (handle_redirects(arg, env) == -1)
+
+
+
+	if (is_builtin(arg->args[0]))
+		return (run_builtin(arg, env, arg->args));
+	if (validate_external_command(arg->args, env) == -1)
 		return (-1);
 	env_array = env_list_to_array(env);
-	return (exec_external(args, env_array));
+	return (exec_external(arg, env_array));
 }
 
 

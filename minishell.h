@@ -113,7 +113,7 @@ int     ft_strcmp(char *src, char *dest);
 t_node  *return_address(char *str, t_node **env);
 int     only_digit(char *str);
 int		ft_export(char **av, t_node **env);
-int     exec_external(char **cmd, char **env);
+int     exec_external(t_cmd *cmd, char **env);
 int	 	is_builtin(char *cmd);
 int		exec_cmd(t_cmd *arg, t_node **env);
 int     exec_builtin(char **cmd, t_node **env);
@@ -133,7 +133,7 @@ void	free_cmd_list(t_cmd *cmds);
 char    *get_env_value(t_node *env, char *key);
 char 	**env_list_to_array(t_node **env);
 int		open_filee(char *filename, t_file_mode mode);
-int		handle_files(t_redir *file, t_node **env);
+int		handle_files(t_redir *file);
 int 	open_file(const char *filename, int flags);
 t_redir *new_redir(char *file, t_redir_type type);
 char    *append_char(char *base, char c);
@@ -151,6 +151,8 @@ int 	check_pipe_syntax(t_token *tokens);
 int 	parse_redirect_token(t_token **tokens, t_cmd *cmd);
 int		redirect_file(int fd, int mode);
 void	sigint_handler(int sig);
+int     handle_redirects(t_cmd *arg);
+int 	handle_file_error(char *filename, int error_code);
 
 
 
