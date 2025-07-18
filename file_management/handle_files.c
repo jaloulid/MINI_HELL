@@ -43,6 +43,10 @@ int    handle_files(t_redir *file)
                 return (-1);
             redirect_file(fd, WRITE_APPEND_MODE);
         }
+        else if(redirect->type == R_HEREDOC)
+        {
+            
+        }
         redirect = redirect->next;
     }
     return (0);

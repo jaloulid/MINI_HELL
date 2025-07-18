@@ -41,6 +41,8 @@ static void	child_process(t_cmd *cmds, int input_fd, int has_pipe, int *pipe_fd,
 		close(pipe_fd[0]);
 		close(pipe_fd[1]);
 	}
+	if (handle_redirects(cmds) == -1)
+		exit(EXIT_FAILURE);
 	exec_cmd(cmds, env);
 	exit(EXIT_FAILURE);
 }

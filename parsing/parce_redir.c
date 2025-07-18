@@ -46,7 +46,7 @@ static t_redir_type get_redir_type(t_token_type token_type)
       return (R_OUT);
        else if (token_type == REDIR_APPEND)
         return (R_APPEND);
-         else if (token_type == HEREDOC) 
+         else if (token_type == HEREDOC)
          return (R_HEREDOC);
           return (-1);
  }
@@ -85,5 +85,4 @@ redir_add_back(&cmd->redirect, redir);
 *tokens = (*tokens)->next;
 *tokens = (*tokens)->next;
 return (1);
-
 }

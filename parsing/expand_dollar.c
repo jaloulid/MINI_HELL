@@ -27,6 +27,7 @@ char    *expand_dollar(const char *str, int *i, t_node *env, int last_exit)
         (*i)++;
     key = ft_substr(str, start, *i - start);
     value = get_env_value(env, key);
+    // exit(1);
     free (key);
     if (value)
         result = ft_strdup(value);

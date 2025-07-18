@@ -28,6 +28,8 @@ void    expand_cmds(t_cmd *cmds, t_node *env, int status)
             tmp = expand_var(cmds->args[i], env, status);
             free(cmds->args[i]);
             cmds->args[i++] = tmp;
+            // printf("%s\n",cmds->args[i]);
+            //exit(1);
         }
         r = cmds->redirect;
         while (r)

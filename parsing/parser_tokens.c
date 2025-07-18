@@ -25,7 +25,7 @@ int parse_one_token(t_token *tokens, t_cmd **current, t_cmd **cmds)
             parse_init_cmd(current, cmds);
             if (!parse_redirect_token(&tokens, *current))
                 return (0);
-            return (1);
+            return (22); 
         }
     else if (tokens->type == PIPE)
         {
@@ -37,8 +37,9 @@ int parse_one_token(t_token *tokens, t_cmd **current, t_cmd **cmds)
 
 t_cmd   *parse_tokens(t_token *tokens)
 {
-    t_cmd *cmds;
-    t_cmd *current;
+    t_cmd   *cmds;
+    t_cmd   *current;
+    int     p;
 
     cmds = NULL;
     current = NULL;
@@ -47,11 +48,14 @@ t_cmd   *parse_tokens(t_token *tokens)
         return NULL;
     while (tokens)
     {
-        if (!parse_one_token(tokens, &current, &cmds))
+        p = parse_one_token(tokens, &current, &cmds);
+        if (!p)
             {
                 free_cmd_list(cmds);
                 return NULL;
             }
+        if (p == 22)
+            tokens = tokens->next;
         tokens = tokens->next;
     }
     return(cmds);

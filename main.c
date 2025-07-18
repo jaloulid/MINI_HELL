@@ -32,6 +32,7 @@ int main(int ac, char **av, char **envp)
 		add_history(line);
 		tokens = lexer(line);
 		cmds = parse_tokens(tokens);
+		expand_cmds(cmds, env, g_exit_status);
 		//printf("hna type : %u\n", cmds->redirect->type);
 		if(pipe_number(cmds) == 1 && cmds->redirect == NULL)
 			g_exit_status = exec_cmd(cmds, &env);
@@ -45,10 +46,9 @@ int main(int ac, char **av, char **envp)
 			free(env);
 			return (1);
 		}
-		// expand_cmds(cmds, &env, g_exit_status);
-		// free_token_list(tokens);
-		// free_cmd_list(cmds);
-		// free(line);
+		free_token_list(tokens);
+		free_cmd_list(cmds);
+		free(line);
 	}
 	return (0);
 }
